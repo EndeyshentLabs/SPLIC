@@ -31,3 +31,14 @@ The program above will print `246` to standard output.
 ```forth
 72 @ 101 @ 108 @ 108 @ 111 @ 44 @ 32 @ 87 @ 111 @ 114 @ 108 @ 100 @ 33
 ```
+
+## Using
+
+SPLIC intrepreter intreprets file named `src.spl` in current working directory.
+
+To run the intrepreter use:
+
+```console
+$ clojure splic.clj
+<program_output>
+```
