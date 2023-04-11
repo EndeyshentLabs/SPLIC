@@ -56,4 +56,4 @@ $ clojure splic.clj
 | `CHAR-NL` | `@:`   | Print value on top of the stack as ASCII character but whith new line at the end |
 | `BREAK`   | `#`    | Exit from program |
 | `HALT`    | `!#`   | Halt the program(exit with 1) |
-| `DEBUG`   | `|`    | Dump all stack |
+| `DEBUG`   | `\|`    | Dump all stack |
