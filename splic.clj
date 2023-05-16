@@ -16,7 +16,8 @@
 (defn spl-kwd [k] (get spl-keywords k))
 
 (def src (slurp "src.spl"))
-(def words (clojure.string/split src #"[\s;()]+"))
+;; (def words (clojure.string/split src #"[\s;()]+"))
+(def words (clojure.string/split (clojure.string/replace src #"}.*[\r\n]" "") #"[\s]+"))
 
 (def wait #())
 
