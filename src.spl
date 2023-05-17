@@ -4,6 +4,10 @@
 4 /
 !
 
+?: 123 - ! } Subtract '123' from user input casted to SPLIC-Number
+
+} ? } Will add a string on top of the stack(lol this is useless) } TODO: Unbug this thing
+
 -23 69 + !
 
 69 @:

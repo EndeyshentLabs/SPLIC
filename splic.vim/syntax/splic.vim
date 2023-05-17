@@ -6,7 +6,7 @@ syntax keyword splTodo contained TODO FIXME XXX NOTE
 
 syntax region splCommentLine start="}" end="$" display contains=splTodo
 
-syntax match splOperators "+\|-\|*\|/\|!\|@:\|@\|#\|!#\||"
+syntax match splOperators "+\|-\|*\|/\|!\|@:\|@\|#\|!#\||\|?:\|?"
 
 syntax match splNumber "\v<\d+>"
 syntax match splNumber "\v-<\d+>"

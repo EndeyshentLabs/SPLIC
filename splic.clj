@@ -8,6 +8,8 @@
   :DUMP "!",
   :CHAR "@",
   :CHAR-NL "@:",
+  :INPUT "?",
+  :INPUT-NU "?:",
   :BREAK "#",
   :HALT "!#",
   :DEBUG "|"
@@ -26,6 +28,7 @@
 (defn kwd [n] (def spl-stack (conj spl-stack n)))
 (defn number [n] (def spl-stack (conj spl-stack n)))
 (defn number* [n] (def spl-stack (into [(Double/toString n)] spl-stack)))
+(defn string* [i] (def spl-stack (into [i] spl-stack)))
 
 (defn make-kwd [id] (kwd id))
 (defn make-number [n] (number n))
@@ -37,13 +40,15 @@
 
 (doseq [i words]
   (condp = (clojure.string/lower-case (clojure.string/trim i))
-    (spl-kwd :PLUS)  (make-kwd i)
+    (spl-kwd :PLUS) (make-kwd i)
     (spl-kwd :MINUS) (make-kwd i)
-    (spl-kwd :MULT)  (make-kwd i)
-    (spl-kwd :DIV)   (make-kwd i)
-    (spl-kwd :DUMP)  (make-kwd i)
-    (spl-kwd :CHAR)  (make-kwd i)
+    (spl-kwd :MULT) (make-kwd i)
+    (spl-kwd :DIV) (make-kwd i)
+    (spl-kwd :DUMP) (make-kwd i)
+    (spl-kwd :CHAR) (make-kwd i)
     (spl-kwd :CHAR-NL)  (make-kwd i)
+    (spl-kwd :INPUT)  (make-kwd i)
+    (spl-kwd :INPUT-NU)  (make-kwd i)
     (spl-kwd :DEBUG)  (make-kwd i)
     (spl-kwd :BREAK) (make-kwd i)
     (spl-kwd :HALT) (make-kwd i)
@@ -125,8 +130,23 @@
                           (System/exit 1)
                         )
     (spl-kwd :DEBUG) :>> (fn [_]
-                           (println spl-stack)
                            (def spl-stack (drop 1 spl-stack))
+                           (println spl-stack)
+                         )
+    (spl-kwd :INPUT-NU) :>> (fn [_]
+                              (try
+                                (number* (read-string (read-line)))
+                                (def spl-stack (drop-nth 1 spl-stack))
+                                (catch Exception e
+                                  (println "SPLIC.RUNTIME_ERROR: YOU PROBABLY NEED TO ENTER A NUMBER")
+                                  (println "Clojure exception:" (.getMessage e))
+                                  (System/exit 2)
+                                )
+                              )
+                            )
+    (spl-kwd :INPUT) :>> (fn [_]
+                           (string* (read-line))
+                           (def spl-stack (drop-nth 1 spl-stack))
                          )
     (wait) ;; Fall through
   )
