@@ -34,12 +34,10 @@ The program above will print `246` to standard output.
 
 ## Using
 
-SPLIC intrepreter intreprets file named `src.spl` in current working directory.
-
 To run the intrepreter use:
 
 ```console
-$ clojure splic.clj
+$ clojure splic.clj SOURCE_FILENAME
 <program_output>
 ```
 

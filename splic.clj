@@ -17,7 +17,17 @@
 
 (defn spl-kwd [k] (get spl-keywords k))
 
-(def src (slurp "src.spl"))
+(def not-enough-args-error #(
+  (println "SPLIC.INTREPRETER_ERROR: Not enough arguments is provided. Usage `clojure splic.clj <filename.spl>`")
+  (System/exit 1)
+))
+
+(if (< (count *command-line-args*) 1)
+  (not-enough-args-error)
+  (println "SPLIC.STARTING...")
+)
+
+(def src (slurp (nth *command-line-args* 0)))
 ;; (def words (clojure.string/split src #"[\s;()]+"))
 (def words (clojure.string/split (clojure.string/replace src #"}.*[\r\n]" "") #"[\s]+"))
 
