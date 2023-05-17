@@ -75,7 +75,7 @@
                         )
     (spl-kwd :MINUS) :>> (fn [_]
                            (number*
-                             (+
+                             (-
                               (read-string (nth spl-stack (- (.indexOf spl-stack i) 2)))
                               (read-string (nth spl-stack (- (.indexOf spl-stack i) 1)))
                              )
