@@ -95,7 +95,7 @@
                         )
     (spl-kwd :DIV) :>> (fn [_]
                          (number*
-                           (* (read-string (nth spl-stack (- (.indexOf spl-stack i) 2)))
+                           (/ (read-string (nth spl-stack (- (.indexOf spl-stack i) 2)))
                               (read-string (nth spl-stack (- (.indexOf spl-stack i) 1))))
                          )
                          (def spl-stack (drop-nth 1 spl-stack))
